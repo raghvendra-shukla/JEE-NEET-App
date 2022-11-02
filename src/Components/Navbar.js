@@ -33,7 +33,6 @@ function Navbar(props) {
                         >
                           Home
                         </Link>
-                        {/* ${location.pathname==="/"? "active":""}` */}
                         <Link
                           to="/about"
                           className={`${location.pathname==="/about"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
@@ -76,6 +75,12 @@ function Navbar(props) {
                           className={`${location.pathname==="/feedback"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                         >
                           Feedback
+                        </Link>
+                        <Link
+                          to="/dashboard"
+                          className={`${location.pathname==="/dashboard"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        >
+                          User Dashboard
                         </Link>
                       </div>
                     )}
@@ -205,6 +210,12 @@ function Navbar(props) {
                           className={`${location.pathname==="/feedback"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                         >
                           Feedback
+                        </Link>
+                        <Link
+                          to="/dashboard"
+                          className={`${location.pathname==="/dashboard"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        >
+                          User Dashboard
                         </Link>
                       </div>
                     )}

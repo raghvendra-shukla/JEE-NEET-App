@@ -14,6 +14,7 @@ import Signup from './Components/Signup';
 import Login from './Components/Login';
 import Alert from './Components/Alert';
 import Feedback from './Components/Feedback';
+import Dashboard from './Components/Dashboard';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -37,6 +38,7 @@ function App() {
     <Route path="/signup" element={<Signup showAlert={showAlert}/>}></Route>
     <Route path="/login" element={<Login showAlert={showAlert}/>}></Route>
     <Route path="/feedback" element={<Feedback showAlert={showAlert}/>}></Route>
+    <Route path="/dashboard" element={<Dashboard showAlert={showAlert}/>}></Route>
     </Routes>
     </Router>
     </>
