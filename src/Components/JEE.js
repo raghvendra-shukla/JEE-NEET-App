@@ -53,7 +53,7 @@ function JEE() {
         </div>
         <div className="row text-center my-2">
           {Data.filter((element)=>{
-            if(search==""){
+            if(search===""){
               return element;
             }
             else if(JSON.stringify(element).toLowerCase().includes(search.toLowerCase())){
@@ -67,7 +67,7 @@ function JEE() {
                 BookImg={element.BookImg}
                 Author={element.Author}
                 Class={element.Class}
-                Price={element.price}
+                Price={element.Price}
                 Buy={element.Buy}
                 Pdf={element.Pdf}
               />

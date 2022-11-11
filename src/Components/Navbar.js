@@ -13,8 +13,8 @@ function Navbar(props) {
     <>
       <div className="min-h-full">
         <nav className="bg-gray-800">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-start">
+          <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-center">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
@@ -24,9 +24,10 @@ function Navbar(props) {
                   />
                 </div>
                 <div className="hidden md:block">
-                  <div className="ml-10 flex items-baseline space-x-4">
+                  <div className="flex items-baseline space-x-1">
                     {!localStorage.getItem("token") ? (
-                      <div className="ml-10 flex items-baseline space-x-4">
+                      <div className=" flex items-baseline space-x-1 overflow-hidden
+                      flex-wrap justify-center">
                         <Link
                           to="/"
                           className={`${location.pathname==="/"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
@@ -41,7 +42,7 @@ function Navbar(props) {
                         </Link>
                       </div>
                     ) : (
-                      <div className="ml-10 flex items-baseline space-x-4">
+                      <div className=" flex items-baseline space-x-1 overflow-hidden flex-wrap justify-center">
                         <Link
                           to="/"
                           className={`${location.pathname==="/"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
@@ -81,6 +82,12 @@ function Navbar(props) {
                           className={`${location.pathname==="/dashboard"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                         >
                           User Dashboard
+                        </Link>
+                        <Link
+                          to="/bookcart"
+                          className={`${location.pathname==="/bookcart"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        >
+                          Your Cart
                         </Link>
                       </div>
                     )}
@@ -160,7 +167,7 @@ function Navbar(props) {
             <div className="md:hidden" id="mobile-menu">
               <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
               {!localStorage.getItem("token") ? (
-                      <div className="ml-10 flex items-baseline space-x-4">
+                      <div className="ml-10 flex items-baseline space-x-1 overflow-hidden flex-wrap justify-center">
                         <Link
                           to="/"
                           className={`${location.pathname==="/"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
@@ -176,7 +183,7 @@ function Navbar(props) {
                         </Link>
                       </div>
                     ) : (
-                      <div className="ml-10 flex items-baseline space-x-4">
+                      <div className="ml-10 flex items-baseline space-x-1 overflow-hidden flex-wrap justify-center">
                         <Link
                           to="/"
                           className={`${location.pathname==="/"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
@@ -216,6 +223,12 @@ function Navbar(props) {
                           className={`${location.pathname==="/dashboard"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                         >
                           User Dashboard
+                        </Link>
+                        <Link
+                          to="/bookcart"
+                          className={`${location.pathname==="/bookcart"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        >
+                          Your Cart
                         </Link>
                       </div>
                     )}

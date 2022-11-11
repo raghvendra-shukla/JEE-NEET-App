@@ -6,7 +6,7 @@ function Home() {
   {document.body.style.backgroundColor="#b7acac"};
   return (
     <>
-    <div className="container relative">
+    <div className="container">
       <h1 className='text-center my-2 text-3xl font-serif font-semibold'>Welcome to JEE NEET Online Library app</h1>
       <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
   <div className="carousel-indicators">

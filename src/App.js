@@ -15,6 +15,7 @@ import Login from './Components/Login';
 import Alert from './Components/Alert';
 import Feedback from './Components/Feedback';
 import Dashboard from './Components/Dashboard';
+import BookCart from './Components/BookCart';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -39,6 +40,7 @@ function App() {
     <Route path="/login" element={<Login showAlert={showAlert}/>}></Route>
     <Route path="/feedback" element={<Feedback showAlert={showAlert}/>}></Route>
     <Route path="/dashboard" element={<Dashboard showAlert={showAlert}/>}></Route>
+    <Route path="/bookcart" element={<BookCart showAlert={showAlert}/>}></Route>
     </Routes>
     </Router>
     </>
