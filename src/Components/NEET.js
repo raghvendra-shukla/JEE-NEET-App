@@ -8,7 +8,7 @@ function NEET() {
   const [loading, setloading] = useState(false);
   const [search, setsearch] = useState("");
   const neetdata=async()=>{
-    let url=`https://jee-neet-api.herokuapp.com/api/neet`;
+    let url=`https://alert-top-coat-wasp.cyclic.app/api/neet`;
     setloading(true);
     let data=await fetch(url);
     let parsedData=await data.json();
