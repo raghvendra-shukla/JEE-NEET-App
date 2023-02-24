@@ -1,8 +1,15 @@
 import React from 'react'
 import { useState } from "react";
+import axios from 'axios';
+import { useEffect } from 'react';
+import { Buffer } from 'buffer';
+// import {bitMap} from 'bitmap';
+import Blob from 'blob';
 
 function Dashboard(props) {
   {document.body.style.backgroundColor="#b7acac"};
+  const [img, setimg] = useState(null);
+  const [pic, setpic] = useState([]);
   const [Info, setInfo] = useState({name:"",email:"",phone:"",country:"",city:"",state:"",address:""});
   const addInfo= async(name,email,phone,country,city,state,address)=>{
     //API call
@@ -17,6 +24,43 @@ function Dashboard(props) {
     const info= await response.json();
     // console.log(info);
   }
+
+  // const addImage= async(image)=>{
+  //   //API call
+  //   const formData = new FormData()
+  //       formData.append('testImage', image)
+  //       const config = {
+  //         headers: {
+  //             'content-type': 'multipart/form-data'
+  //           }
+  //       };
+  //       axios.post("http://localhost:5000/api/pic/addimage", formData,config, {
+  //       }).then(res => {
+  //           console.log(res)
+  //       })
+  // }
+  const handleImageonChange=(e)=>{
+    setimg({ img: e.target.files[0] });
+  }
+
+  const handleImageonClick=(e)=>{
+    e.preventDefault();
+    // addImage(img);
+    const formData = new FormData()
+        formData.append('testImage', img)
+        const config = {
+          headers: {
+              'content-type': 'multipart/form-data',
+              "auth-token": localStorage.getItem("token"),
+            }
+        };
+        axios.post("http://localhost:5000/api/pic/addimage", formData,config, {
+        }).then(res => {
+            console.log(res)
+        })
+    props.showAlert("Image has been added successfully","success");
+  }
+
     const handleInfochange=(e)=>{ 
         setInfo({...Info,[e.target.name]:e.target.value})
     }
@@ -26,6 +70,50 @@ function Dashboard(props) {
         setInfo({name:"",email:"",phone:"",country:"",city:"",state:"",address:""})
         props.showAlert("Info has been added successfully","success");
     }
+  //   const arrayBufferToBase64=(buffer)=>{
+  //     var binary = '';
+  //     var bytes = [].slice.call(new Uint8Array(buffer));
+  //     bytes.forEach((b) => binary += String.fromCharCode(b));
+  //     return window.btoa(binary);
+  // };
+
+    const getpic= async()=>{
+      const config = {
+        headers: {
+            "auth-token": localStorage.getItem("token"),
+          }
+      };
+      const response  = await axios.get('http://localhost:5000/api/pic/fetchImage',config)
+      // setpic(response.image.data);
+      // const arrayBuffer=response.data.data;
+      // const base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+      // {image: "data:image/png;base64," + data;}
+      // let base64Flag = 'data:image/jpg;base64,';
+      // let imageStr =arrayBufferToBase64(response.data.data);
+      // let imageStr=response.data.data.toString('base64')
+      //encode to base64
+      // var imageStr = btoa(String.fromCharCode.apply(null, response.data.data));
+      // setpic({pic:base64Flag+imageStr});
+      // console.log(base64Flag+imageStr);
+      // response.image = new Buffer.from(bitMap).toString("base64");
+      console.log(response.data);
+      // const blob = new Blob( [ response.data ] );
+      // const url = URL.createObjectURL( blob );
+      // console.log(url);
+      // const img = document.getElementById( 'img' );
+      // img.src = url;
+      // So the Blob can be Garbage Collected
+      // img.onload = e => URL.revokeObjectURL( url );
+    // ... do something else with 'buffer'
+      // setpic(url);
+      // let temp=new Buffer.from(bitMap).toString("base64");
+      // console.log(temp);
+      setpic(Buffer.from(response.data, 'binary').toString('base64'));
+      }
+    useEffect(() => {
+      getpic();
+    }, [])
+  
   return (
     <>
     <div>
@@ -55,11 +143,21 @@ function Dashboard(props) {
                       </button>
                     </div>
                   </div>
-
+                  {/* {<img src={"data:image/jpg;base64,"+pic} alt='image'></img>} */}
+                  {/* {pic.map((ele)=>{
+                    const base64String = btoa(String.fromCharCode(...new Uint8Array(ele?.image?.data?.data)));
+                  return(
+                    <div className="col" key={ele._id}>
+                      <img src={`data: image/jpg; base64, ${base64String}`} />
+                      </div>
+                  )
+                    })} */}
+                    <img src={`data:image/jpg;base64,${pic}`} className="img-fluid rounded" width={150} alt="Not Found" />
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Cover photo</label>
                     <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                       <div className="space-y-1 text-center">
+                        
                         <svg
                           className="mx-auto h-12 w-12 text-gray-400"
                           stroke="currentColor"
@@ -80,7 +178,7 @@ function Dashboard(props) {
                             className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                           >
                             <span>Upload a file</span>
-                            <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                            <input id="file-upload" name="testImage" type="file" className="sr-only" onChange={handleImageonChange} />
                           </label>
                           <p className="pl-1">or drag and drop</p>
                         </div>
@@ -93,6 +191,7 @@ function Dashboard(props) {
                   <button
                     type="submit"
                     className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    onClick={handleImageonClick}
                   >
                     Save
                   </button>
