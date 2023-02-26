@@ -9,7 +9,7 @@ import Blob from 'blob';
 function Dashboard(props) {
   {document.body.style.backgroundColor="#b7acac"};
   const [img, setimg] = useState(null);
-  const [pic, setpic] = useState([]);
+  const [pic, setpic] = useState("");
   const [Info, setInfo] = useState({name:"",email:"",phone:"",country:"",city:"",state:"",address:""});
   const addInfo= async(name,email,phone,country,city,state,address)=>{
     //API call
@@ -40,7 +40,7 @@ function Dashboard(props) {
   //       })
   // }
   const handleImageonChange=(e)=>{
-    setimg({ img: e.target.files[0] });
+    setimg(e.target.files[0]);
   }
 
   const handleImageonClick=(e)=>{
@@ -56,7 +56,7 @@ function Dashboard(props) {
         };
         axios.post("http://localhost:5000/api/pic/addimage", formData,config, {
         }).then(res => {
-            console.log(res)
+            // console.log(res)
         })
     props.showAlert("Image has been added successfully","success");
   }
@@ -70,12 +70,6 @@ function Dashboard(props) {
         setInfo({name:"",email:"",phone:"",country:"",city:"",state:"",address:""})
         props.showAlert("Info has been added successfully","success");
     }
-  //   const arrayBufferToBase64=(buffer)=>{
-  //     var binary = '';
-  //     var bytes = [].slice.call(new Uint8Array(buffer));
-  //     bytes.forEach((b) => binary += String.fromCharCode(b));
-  //     return window.btoa(binary);
-  // };
 
     const getpic= async()=>{
       const config = {
@@ -84,39 +78,22 @@ function Dashboard(props) {
           }
       };
       const response  = await axios.get('http://localhost:5000/api/pic/fetchImage',config)
-      // setpic(response.image.data);
-      // const arrayBuffer=response.data.data;
-      // const base64String = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-      // {image: "data:image/png;base64," + data;}
       // let base64Flag = 'data:image/jpg;base64,';
-      // let imageStr =arrayBufferToBase64(response.data.data);
-      // let imageStr=response.data.data.toString('base64')
-      //encode to base64
-      // var imageStr = btoa(String.fromCharCode.apply(null, response.data.data));
-      // setpic({pic:base64Flag+imageStr});
-      // console.log(base64Flag+imageStr);
-      // response.image = new Buffer.from(bitMap).toString("base64");
-      console.log(response.data);
-      // const blob = new Blob( [ response.data ] );
-      // const url = URL.createObjectURL( blob );
-      // console.log(url);
-      // const img = document.getElementById( 'img' );
-      // img.src = url;
-      // So the Blob can be Garbage Collected
-      // img.onload = e => URL.revokeObjectURL( url );
-    // ... do something else with 'buffer'
-      // setpic(url);
-      // let temp=new Buffer.from(bitMap).toString("base64");
-      // console.log(temp);
-      setpic(Buffer.from(response.data, 'binary').toString('base64'));
+      // let imgstr = arrayBufferToBase64(response.data.data.data);
+      // get the data as endoded in base 64 from the backend
+      setpic(response.data);
+      // console.log(base64Flag+imgstr);
+      // console.log(response.data);
       }
     useEffect(() => {
       getpic();
-    }, [])
+    },[img])
   
   return (
     <>
     <div>
+      <div className="showimage">
+      </div>
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-0">
@@ -131,9 +108,12 @@ function Dashboard(props) {
                     <label className="block text-sm font-medium text-gray-700">Photo</label>
                     <div className="mt-1 flex items-center">
                       <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                        <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                    {(pic!=="")?(<img src={`data:image/jpg;base64,${pic}`}  width={150} alt="Not Found" />):(<svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
+                        </svg>)}
+                        {/* <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg> */}
                       </span>
                       <button
                         type="button"
@@ -143,21 +123,10 @@ function Dashboard(props) {
                       </button>
                     </div>
                   </div>
-                  {/* {<img src={"data:image/jpg;base64,"+pic} alt='image'></img>} */}
-                  {/* {pic.map((ele)=>{
-                    const base64String = btoa(String.fromCharCode(...new Uint8Array(ele?.image?.data?.data)));
-                  return(
-                    <div className="col" key={ele._id}>
-                      <img src={`data: image/jpg; base64, ${base64String}`} />
-                      </div>
-                  )
-                    })} */}
-                    <img src={`data:image/jpg;base64,${pic}`} className="img-fluid rounded" width={150} alt="Not Found" />
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Cover photo</label>
                     <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                       <div className="space-y-1 text-center">
-                        
                         <svg
                           className="mx-auto h-12 w-12 text-gray-400"
                           stroke="currentColor"
