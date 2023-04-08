@@ -87,14 +87,14 @@ function Navbar(props) {
                           to="/bookcart"
                           className={`${location.pathname==="/bookcart"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                         >
-                          Your Cart
+                          Your Favourites
                         </Link>
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="relative ml-3">
-                  <div className="dropdown ">
+                  <div className="dropdown">
                     <button
                       className="btn btn-secondary flex max-w-xs items-center bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       type="button"
@@ -228,7 +228,7 @@ function Navbar(props) {
                           to="/bookcart"
                           className={`${location.pathname==="/bookcart"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                         >
-                          Your Cart
+                          Your Favourites
                         </Link>
                       </div>
                     )}
@@ -242,3 +242,4 @@ function Navbar(props) {
 }
 
 export default Navbar;
+

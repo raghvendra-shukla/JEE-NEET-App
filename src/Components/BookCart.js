@@ -4,6 +4,7 @@ import { useState } from "react";
 import Card2 from './Card2';
 // import { useNavigate } from "react-router-dom";
 
+// new name for this is Favourite
 function BookCart(props) {
   {
     document.body.style.backgroundColor = "#b7acac";
@@ -54,7 +55,7 @@ function BookCart(props) {
   return (
     <>
     <div className="row text-center my-2">
-          <h2 className='text-center my-2 text-2xl font-semibold'>Your Books</h2>
+          <h2 className='text-center my-2 text-2xl font-semibold'>Your Favourite Books</h2>
           {books.map((element) => {
             return (
               <div className="col" key={element._id}>

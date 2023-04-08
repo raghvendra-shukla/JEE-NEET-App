@@ -1,3 +1,4 @@
+import { Button } from "bootstrap";
 import React from "react";
 import { useState } from "react";
 
@@ -16,6 +17,7 @@ function Card(props) {
         });
         const book= await response.json();
         // console.log(book);
+        // console.log(Pdf);
       }
   const handleonclick=(e)=>{
     e.preventDefault();
@@ -33,11 +35,11 @@ function Card(props) {
             <li className="list-group-item bg-slate-200">{Subject}</li>
             <li className="list-group-item bg-slate-200">{Author}</li>
             <li className="list-group-item bg-slate-200">{Class}</li>
-            <li className="list-group-item bg-slate-200">{Price}</li>
+            <li className="list-group-item bg-slate-200">Rs.{Price}</li>
           </ul>
           <a target="_blank" rel="noreferrer" href={Buy} className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600">Buy Now</a>
-          <a target="_blank" rel="noreferrer" href={Pdf} className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600">Pdf</a>
-          <button  className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600" onClick={handleonclick}>Add to cart</button>
+          {(Pdf!=="")?(<a target="_blank" rel="noreferrer" href={Pdf} className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600">Pdf</a>):(<button className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600">No Pdf</button>)}
+          <button  className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600" onClick={handleonclick}>Add to Favourites</button>
         </div>
       </div>
     </div>

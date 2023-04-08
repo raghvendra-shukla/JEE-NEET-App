@@ -47,11 +47,11 @@ function Home() {
   </button>
 </div>
     </div>
-    <div className="mt-auto w-100">
+    {/* <div className="mt-auto w-100">
     <footer className='text-center bg-black text-white'>
       copyright &copy 2022 JEE-NEETlibrary.com All rights || reserved
     </footer>
-    </div>
+    </div> */}
     </>
   )
 }

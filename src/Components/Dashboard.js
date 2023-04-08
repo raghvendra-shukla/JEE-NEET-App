@@ -10,6 +10,7 @@ function Dashboard(props) {
   {document.body.style.backgroundColor="#b7acac"};
   const [img, setimg] = useState(null);
   const [pic, setpic] = useState("");
+  const [showimg,setshowimg]=useState(null);
   const [Info, setInfo] = useState({name:"",email:"",phone:"",country:"",city:"",state:"",address:""});
   const addInfo= async(name,email,phone,country,city,state,address)=>{
     //API call
@@ -40,7 +41,13 @@ function Dashboard(props) {
   //       })
   // }
   const handleImageonChange=(e)=>{
+  //   if (!e.target.files || e.target.files.length === 0) {
+  //     setimg(undefined)
+  //     return
+  // }
     setimg(e.target.files[0]);
+    const objecturl=URL.createObjectURL(e.target.files[0]);
+    setshowimg(objecturl);
   }
 
   const handleImageonClick=(e)=>{
@@ -59,6 +66,7 @@ function Dashboard(props) {
             // console.log(res)
         })
     props.showAlert("Image has been added successfully","success");
+    setshowimg(null);
   }
 
     const handleInfochange=(e)=>{ 
@@ -82,13 +90,15 @@ function Dashboard(props) {
       // let imgstr = arrayBufferToBase64(response.data.data.data);
       // get the data as endoded in base 64 from the backend
       setpic(response.data);
+      // console.log(pic);
       // console.log(base64Flag+imgstr);
       // console.log(response.data);
       }
     useEffect(() => {
       getpic();
-    },[img])
-  
+    },[handleImageonClick])
+    
+    
   return (
     <>
     <div>
@@ -108,26 +118,26 @@ function Dashboard(props) {
                     <label className="block text-sm font-medium text-gray-700">Photo</label>
                     <div className="mt-1 flex items-center">
                       <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                    {(pic!=="")?(<img src={`data:image/jpg;base64,${pic}`}  width={150} alt="Not Found" />):(<svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                    {(pic!=="Not Found")?(<img src={`data:image/jpg;base64,${pic}`}  width={150} alt="Not Found" />):(<svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>)}
                         {/* <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg> */}
                       </span>
-                      <button
+                      {/* <button
                         type="button"
                         className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         Change
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Cover photo</label>
                     <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                       <div className="space-y-1 text-center">
-                        <svg
+                      {(showimg!==null)?(img &&  <img src={showimg}/>):(<svg
                           className="mx-auto h-12 w-12 text-gray-400"
                           stroke="currentColor"
                           fill="none"
@@ -140,18 +150,18 @@ function Dashboard(props) {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           />
-                        </svg>
+                        </svg>)}
                         <div className="flex text-sm text-gray-600">
                           <label
                             htmlFor="file-upload"
                             className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                           >
-                            <span>Upload a file</span>
+                            <span>Upload a Profile Pic/Change a Profile Pic</span>
                             <input id="file-upload" name="testImage" type="file" className="sr-only" onChange={handleImageonChange} />
                           </label>
-                          <p className="pl-1">or drag and drop</p>
+                          {/* <p className="pl-1">or drag and drop</p> */}
                         </div>
-                        <p className="text-xs text-gray-500">JPG</p>
+                        <p className="text-xs text-gray-500">In JPG Format Only</p>
                       </div>
                     </div>
                   </div>

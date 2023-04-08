@@ -8,6 +8,7 @@ function NEET() {
   const [loading, setloading] = useState(false);
   const [search, setsearch] = useState("");
   const neetdata=async()=>{
+    // https://alert-top-coat-wasp.cyclic.app/api/neet
     let url=`https://alert-top-coat-wasp.cyclic.app/api/neet`;
     setloading(true);
     let data=await fetch(url);
@@ -59,7 +60,7 @@ function NEET() {
             }
           }).map((element)=>(
         <div className="col" key={element.Buy}>
-          <Card Bookname={element.Bookname} Subject={element.Subject} BookImg={element.BookImg} Author={element.Author} Class={element.Class} Price={element.price} Buy={element.Buy} Pdf={element.Pdf}/>
+          <Card Bookname={element.Bookname} Subject={element.Subject} BookImg={element.BookImg} Author={element.Author} Class={element.Class} Price={element.Price} Buy={element.Buy} Pdf={element.Pdf}/>
         </div>
       ))}
     </div>
