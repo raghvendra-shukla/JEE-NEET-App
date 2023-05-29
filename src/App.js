@@ -16,6 +16,7 @@ import Alert from './Components/Alert';
 import Feedback from './Components/Feedback';
 import Dashboard from './Components/Dashboard';
 import BookCart from './Components/BookCart';
+import { ErrorPage } from './Components/ErrorPage';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -34,13 +35,14 @@ function App() {
     <Routes>
     <Route path="/" element={<Home showAlert={showAlert}/>}></Route>
     <Route path="/about" element={<About showAlert={showAlert}/>}></Route>
-    <Route path="/neet" element={<NEET showAlert={showAlert}/>}></Route>
-    <Route path="/jee" element={<JEE showAlert={showAlert}/>}></Route>
-    <Route path="/signup" element={<Signup showAlert={showAlert}/>}></Route>
-    <Route path="/login" element={<Login showAlert={showAlert}/>}></Route>
-    <Route path="/feedback" element={<Feedback showAlert={showAlert}/>}></Route>
-    <Route path="/dashboard" element={<Dashboard showAlert={showAlert}/>}></Route>
-    <Route path="/bookcart" element={<BookCart showAlert={showAlert}/>}></Route>
+    <Route path="/neet" element={(localStorage.getItem("token"))?<NEET showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    <Route path="/jee" element={(localStorage.getItem("token"))?<JEE showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    <Route path="/signup" element={(!localStorage.getItem("token"))?<Signup showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    <Route path="/login" element={(!localStorage.getItem("token"))?<Login showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    <Route path="/feedback" element={(localStorage.getItem("token"))?<Feedback showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    <Route path="/dashboard" element={(localStorage.getItem("token"))?<Dashboard showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    <Route path="/bookcart" element={(localStorage.getItem("token"))?<BookCart showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    < Route path="*" element={<ErrorPage/>}/>
     </Routes>
     </Router>
     </>

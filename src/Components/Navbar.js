@@ -1,5 +1,8 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 function Navbar(props) {
   let location = useLocation();
@@ -9,6 +12,20 @@ function Navbar(props) {
     navigate("/login");
     props.showAlert("logout successfull", "success");
   };
+  const [pic, setpic] = useState("");
+
+  const getpic= async()=>{
+    const config = {
+      headers: {
+          "auth-token": localStorage.getItem("token"),
+        }
+    };
+    const response  = await axios.get('http://localhost:5000/api/pic/fetchImage',config)
+    setpic(response.data);
+    }
+  useEffect(() => {
+    getpic();
+  },[])
   return (
     <>
       <div className="min-h-full">
@@ -101,11 +118,12 @@ function Navbar(props) {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <img
+                      {(pic!=="Not Found")?(<img className="h-8 w-8 rounded-full" src={`data:image/jpg;base64,${pic}`}  width={150} alt="Not Found"/>):
+                      (<img
                         className="h-8 w-8 rounded-full"
                         src="https://png.pngtree.com/png-vector/20220628/ourlarge/pngtree-user-profile-avatar-vector-admin-png-image_5289693.png"
                         alt=""
-                      />
+                      />)}
                     </button>
                     <ul className="dropdown-menu dropdown-menu-dark">
                       {!localStorage.getItem("token") ? (

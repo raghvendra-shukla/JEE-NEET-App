@@ -47,10 +47,10 @@ function BookCart(props) {
     );
     const json = response.json();
     // console.log("deleting the book with id" + id);
-    const newProfile = books.filter((books) => {
+    const newBook = books.filter((books) => {
       return books._id !== id;
     });
-    setbooks(newProfile);
+    setbooks(newBook);
   };
   return (
     <>
