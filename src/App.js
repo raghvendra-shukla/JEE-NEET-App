@@ -17,6 +17,7 @@ import Feedback from './Components/Feedback';
 import Dashboard from './Components/Dashboard';
 import BookCart from './Components/BookCart';
 import { ErrorPage } from './Components/ErrorPage';
+import Stationery from './Components/Stationery';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -37,6 +38,7 @@ function App() {
     <Route path="/about" element={<About showAlert={showAlert}/>}></Route>
     <Route path="/neet" element={(localStorage.getItem("token"))?<NEET showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
     <Route path="/jee" element={(localStorage.getItem("token"))?<JEE showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
+    <Route path="/stationery" element={(localStorage.getItem("token"))?<Stationery showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
     <Route path="/signup" element={(!localStorage.getItem("token"))?<Signup showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
     <Route path="/login" element={(!localStorage.getItem("token"))?<Login showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>
     <Route path="/feedback" element={(localStorage.getItem("token"))?<Feedback showAlert={showAlert}/>:<Home showAlert={showAlert}/>}></Route>

@@ -87,6 +87,12 @@ function Navbar(props) {
                         >
                           NEET
                         </Link>
+                        <Link
+                          to="/stationery"
+                          className={`${location.pathname==="/stationery"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        >
+                          stationery
+                        </Link>
 
                         <Link
                           to="/feedback"
@@ -228,6 +234,13 @@ function Navbar(props) {
                           className={`${location.pathname==="/neet"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
                         >
                           NEET
+                        </Link>
+
+                        <Link
+                          to="/stationery"
+                          className={`${location.pathname==="/stationery"? "bg-gray-900":""} text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium`}
+                        >
+                          stationery
                         </Link>
 
                         <Link
