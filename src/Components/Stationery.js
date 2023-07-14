@@ -29,7 +29,7 @@ function Stationery() {
     
   return (
     <>
-        <div className="container flex text-center justify-center">
+        {/* <div className="container flex text-center justify-center"> */}
         <div className="container flex my-2">
             <select className="form-select me-2 bg-slate-100 browser-default custom-select" onChange={handleonchange}>
                 {/* <option selected value="sagar">sagar</option> */}
@@ -51,7 +51,7 @@ function Stationery() {
                     ))}
                 </div>
             </div>
-        </div>
+        {/* </div> */}
     </>
   )
 }

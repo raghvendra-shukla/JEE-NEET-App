@@ -1,106 +1,197 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useState } from "react";
 import axios from 'axios';
-import { useEffect } from 'react';
-import { Buffer } from 'buffer';
-// import {bitMap} from 'bitmap';
-import Blob from 'blob';
+import { useEffect,useRef } from 'react';
+import Infocard from './Infocard';
 
 function Dashboard(props) {
   {document.body.style.backgroundColor="#b7acac"};
+  const { showAlert } = props;
+  const ref=useRef(null);
+  const refclose=useRef(null);
   const [img, setimg] = useState(null);
   const [pic, setpic] = useState("");
   const [showimg,setshowimg]=useState(null);
   const [Info, setInfo] = useState({name:"",email:"",phone:"",country:"",city:"",state:"",address:""});
-  const addInfo= async(name,email,phone,country,city,state,address)=>{
+  const [profile, setprofile] = useState(null);
+  const getprofile = async () => {
     //API call
-    const response = await fetch("http://localhost:5000/api/dashboard/addInfo", {
-      method: 'POST',
+    const response = await fetch(
+      "http://localhost:5000/api/dashboard/fetchInfo",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    const json = await response.json();
+    // console.log(json);
+    setprofile(json);
+  };
+  //editing a Info
+  const editprofile = async (
+    id,
+    name,
+    email,
+    phone,
+    country,
+    city,
+    state,
+    address
+  ) => {
+    // Api call
+    const response = await fetch(`http://localhost:5000/api/dashboard/updateInfo/${id}`, {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ name,
+        email,
+        country,
+        phone,
+        city,
+        state,
+        address}),
+      });
+    const json = response.json();
+    //logic to Editing a profile
+    const newprof = JSON.parse(JSON.stringify(Info));
+    for (let index = 0; index < newprof.length; index++) {
+      const element = newprof[index];
+      if (element._id === id) {
+        newprof[index].name = name;
+        newprof[index].email = email;
+        newprof[index].phone = phone;
+        newprof[index].country = country;
+        newprof[index].city = city;
+        newprof[index].state = state;
+        newprof[index].address = address;
+        break;
+      }
+    }
+    setprofile(newprof);
+  };
+
+  const [proff, setproff] = useState({id:"",ename:"",eemail:"",ephone:"",ecountry:"",ecity:"",estate:"",eaddress:""});
+  const updateprofile = (currentproff) => {
+    ref.current.click();
+    setproff({id:currentproff._id,ename:currentproff.name,eemail:currentproff.email,ephone:currentproff.phone,ecountry:currentproff.country,ecity:currentproff.city,estate:currentproff.state,eaddress:currentproff.address});
+  };
+const handleonclick=(e)=>{
+    e.preventDefault();
+    editprofile(proff.id,proff.ename,proff.eemail,proff.ephone,proff.ecountry,proff.ecity,proff.estate,proff.eaddress);
+    props.showAlert("Information has been updated","success");
+    // console.log("Updating a note...",proff);
+    refclose.current.click();
+}
+const handleonchange=(e)=>{ 
+  setproff({...proff,[e.target.name]:e.target.value})
+}
+
+const addInfo= async(name,email,phone,country,city,state,address)=>{
+  //API call
+  const response = await fetch("http://localhost:5000/api/dashboard/addInfo", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({name,email,phone,country,city,state,address})
     });
-    const info= await response.json();
+    // const info= await response.json();
     // console.log(info);
+    // setInfo
   }
-
+  
   // const addImage= async(image)=>{
-  //   //API call
-  //   const formData = new FormData()
-  //       formData.append('testImage', image)
-  //       const config = {
-  //         headers: {
-  //             'content-type': 'multipart/form-data'
-  //           }
-  //       };
-  //       axios.post("http://localhost:5000/api/pic/addimage", formData,config, {
-  //       }).then(res => {
-  //           console.log(res)
-  //       })
-  // }
-  const handleImageonChange=(e)=>{
-  //   if (!e.target.files || e.target.files.length === 0) {
-  //     setimg(undefined)
-  //     return
-  // }
-    setimg(e.target.files[0]);
-    const objecturl=URL.createObjectURL(e.target.files[0]);
-    setshowimg(objecturl);
-  }
-
-  const handleImageonClick=(e)=>{
-    e.preventDefault();
-    // addImage(img);
+    //   //API call
+    //   const formData = new FormData()
+    //       formData.append('testImage', image)
+    //       const config = {
+      //         headers: {
+        //             'content-type': 'multipart/form-data'
+        //           }
+        //       };
+        //       axios.post("http://localhost:5000/api/pic/addimage", formData,config, {
+          //       }).then(res => {
+            //           console.log(res)
+            //       })
+            // }
+            const handleImageonChange=(e)=>{
+              //   if (!e.target.files || e.target.files.length === 0) {
+                //     setimg(undefined)
+                //     return
+                // }
+                setimg(e.target.files[0]);
+                const objecturl=URL.createObjectURL(e.target.files[0]);
+                setshowimg(objecturl);
+              }
+              
+              const handleImageonClick=(e)=>{
+                e.preventDefault();
     const formData = new FormData()
-        formData.append('testImage', img)
-        const config = {
-          headers: {
-              'content-type': 'multipart/form-data',
-              "auth-token": localStorage.getItem("token"),
-            }
-        };
-        axios.post("http://localhost:5000/api/pic/addimage", formData,config, {
-        }).then(res => {
-            // console.log(res)
-        })
+    // addImage(img);
+    formData.append('testImage', img)
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+        "auth-token": localStorage.getItem("token"),
+      }
+    };
+    axios.post("http://localhost:5000/api/pic/addimage", formData,config, {
+    }).then(res => {
+      // console.log(res)
+    })
     props.showAlert("Image has been added successfully","success");
     setshowimg(null);
   }
-
-    const handleInfochange=(e)=>{ 
-        setInfo({...Info,[e.target.name]:e.target.value})
-    }
-    const handleInfoclick=(e)=>{
-        e.preventDefault();
-        addInfo(Info.name,Info.email,Info.phone,Info.country,Info.city,Info.state,Info.address)
-        setInfo({name:"",email:"",phone:"",country:"",city:"",state:"",address:""})
-        props.showAlert("Info has been added successfully","success");
-    }
-
-    const getpic= async()=>{
-      const config = {
-        headers: {
-            "auth-token": localStorage.getItem("token"),
-          }
-      };
-      const response  = await axios.get('http://localhost:5000/api/pic/fetchImage',config)
-      // let base64Flag = 'data:image/jpg;base64,';
-      // let imgstr = arrayBufferToBase64(response.data.data.data);
-      // get the data as endoded in base 64 from the backend
-      setpic(response.data);
-      // console.log(pic);
-      // console.log(base64Flag+imgstr);
-      // console.log(response.data);
+  
+  const handleInfochange=(e)=>{ 
+    setInfo({...Info,[e.target.name]:e.target.value})
+  }
+  const handleInfoclick=(e)=>{
+    e.preventDefault();
+    addInfo(Info.name,Info.email,Info.phone,Info.country,Info.city,Info.state,Info.address)
+    setInfo({name:"",email:"",phone:"",country:"",city:"",state:"",address:""})
+    props.showAlert("Info has been added successfully","success");
+  }
+  
+  const getpic= async()=>{
+    const config = {
+      headers: {
+        "auth-token": localStorage.getItem("token"),
       }
-    useEffect(() => {
-      getpic();
-    },[handleImageonClick])
-    
-    
-  return (
-    <>
+    };
+    const response  = await axios.get('http://localhost:5000/api/pic/fetchImage',config)
+    // let base64Flag = 'data:image/jpg;base64,';
+    // let imgstr = arrayBufferToBase64(response.data.data.data);
+    // get the data as endoded in base 64 from the backend
+    setpic(response.data);
+    // console.log(pic);
+    // console.log(base64Flag+imgstr);
+    // console.log(response.data);
+  }
+  useEffect(() => {
+    getpic();
+    // console.log(toggle);
+  },[handleImageonClick])
+  // useCallback(
+    //   () => {
+      //     getpic();
+      //   },
+      //   [toggle],
+      // )
+      
+      useEffect(() => {
+          getprofile();
+          // console.log(profile);
+      },[updateprofile]);
+      
+      return (
+        <>
     <div>
       <div className="showimage">
       </div>
@@ -194,6 +285,7 @@ function Dashboard(props) {
               <h3 className="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
             </div>
           </div>
+          {(profile==null)?(
           <div className="mt-5 md:col-span-2 md:mt-0">
             <form action="#" method="POST">
               <div className="overflow-hidden shadow sm:rounded-md">
@@ -328,7 +420,138 @@ function Dashboard(props) {
                 </div>
               </div>
             </form>
+          </div>):(
+          <>
+          <button
+          ref={ref}
+          type="button"
+          className="btn btn-primary my-2 d-none"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Edit your profile
+        </button>
+
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Edit Profile
+                </h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"><span>&#10005;</span></button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleonchange}
+                      id="ename"
+                      name="ename"
+                      aria-describedby="emailHelp"
+                      value={proff.ename}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="eemail"
+                      onChange={handleonchange}
+                      name="eemail"
+                      value={proff.eemail}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="phone" className="form-label">
+                      Phone
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="ephone"
+                      onChange={handleonchange}
+                      name="ephone"
+                      value={proff.ephone}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="Country" className="form-label">
+                      Country
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleonchange}
+                      id="ecountry"
+                      name="ecountry"
+                      value={proff.ecountry}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="city" className="form-label">
+                      City
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleonchange}
+                      id="ecity"
+                      name="ecity"
+                      value={proff.ecity}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="Address" className="form-label">
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleonchange}
+                      id="eaddress"
+                      name="eaddress"
+                      value={proff.eaddress}
+                    />
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600"
+                  data-bs-dismiss="modal"
+                  ref={refclose}
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="btn bg-black text-white my-2 mx-2 hover:bg-green-600 active:bg-green-600"
+                  onClick={handleonclick}
+                >
+                  Update Profile
+                </button>
+              </div>
+            </div>
           </div>
+        </div>
+        <Infocard id={profile._id} name={profile.name} email={profile.email} phone={profile.phone} country={profile.country} city={profile.city} state={profile.state} address={profile.address} updateprofile={updateprofile} profile={profile} showAlert={showAlert}/>
+  </>)}
         </div>
       </div>
       <div className="hidden sm:block" aria-hidden="true">
