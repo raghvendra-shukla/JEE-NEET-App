@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# JEE-NEET App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app empowers JEE-NEET students with access to the finest preparation books, ensuring optimal success.
 
-## Available Scripts
+Home Page
 
-In the project directory, you can run:
+![Screenshot (307)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/a6a9f558-55af-4af8-922a-be48680fe198)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Signup Page
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Screenshot (306)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/64699c73-a8dd-4505-acf2-1476b4bc4cf8)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Login Page
 
-### `npm run build`
+![Screenshot (305)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/6fb7ec97-d970-4aba-91f0-ea0df142c539)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+JEE Page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Screenshot (298)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/9c8440be-8c11-4b68-80a9-5f6d98d113a9)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+NEET Page
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Screenshot (299)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/763fd2c7-f60a-4197-84a5-57f75260ed13)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Stationeries Page
 
-## Learn More
+![Screenshot (300)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/58add5f8-349e-4518-a12a-19bcf7a239d9)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+DashBoard Profile Page
 
-### Code Splitting
+![Screenshot (296)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/41df328b-19c2-49b3-bab7-b1d4387fae6a)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+DashBoard personal Information Page
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![Screenshot (297)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/525789b2-520e-4601-9e4c-c266ae26bb7d)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+DashBoard personal Information Update Page
 
-### Advanced Configuration
+![Screenshot (303)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/d63df4d1-e611-47d2-8bb0-1eefdeff6509)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+FeedBack Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![Screenshot (295)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/1b19c683-a0bc-4c93-8063-e32da2ad2da5)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+logout Page
+
+![Screenshot (304)](https://github.com/raghvendra-shukla/JEE-NEET-App/assets/109507118/453298d4-3a89-4831-aeb5-c0825a029779)
+
