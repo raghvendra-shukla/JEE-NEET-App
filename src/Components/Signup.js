@@ -1,14 +1,33 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+// import { gapi } from "gapi-script";
 
 function Signup(props) {
   {document.body.style.backgroundColor="#b7acac"};
   const navigate = useNavigate();
+  const ClientID="85578405845-6uplql0qt4ha3875d4vck8fno0pg2dlo.apps.googleusercontent.com";
+  // const initializeGapi = () => {
+  //   gapi.client.init({
+  //     clientId: ClientID,
+  //     scope: "",
+  //   });
+  // };
+  
+  // useEffect(() =>{
+  //   // load and init google api scripts
+  //   gapi.load("client:auth2", initializeGapi);
+  // })
     const [credentials, setCredentials] = useState({name:"",email:"",password:"",cpassword:""})
+    const [googleCredentials, setgoogleCredentials] = useState({name:"",email:"",password:""})
+
     const handleonsubmit= async (e)=>{
+      // console.log("ha ha");
         e.preventDefault();
-        // const  {name,email,password}=credentials;
+        const  {name,email,password}=credentials;
         const response = await fetch('http://localhost:5000/api/auth/createuser', {
             method: 'POST',
             headers: {
@@ -56,6 +75,49 @@ function Signup(props) {
         <Link to="/login" className="btn bg-black text-white mb-1">Login <i className="fa-solid fa-right-to-bracket"></i></Link>
         </div>
     </form>
+    <div className="container text-center ">
+      <GoogleOAuthProvider clientId={ClientID}>
+          <GoogleLogin
+            className="googlesignup text-center my-2"
+            buttonText="Sign In with Google"
+              onSuccess={credentialResponse => {
+                // console.log(credentialResponse);
+                let decoded = jwt_decode(credentialResponse.credential);
+                // console.log(decoded);
+                // console.log(decoded.name);
+                // console.log(decoded.email);
+                // console.log(decoded.sub);
+                // console.log(typeof(decoded.name));
+                const googleSubmit= async ()=>{
+                  const response = await fetch('http://localhost:5000/api/auth/createuser', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({name:decoded.name,email:decoded.email,password:decoded.sub})
+                      });
+                      const json= await response.json(); 
+                      // console.log(json);
+                      if(json.success){
+                        localStorage.setItem("token",json.Authtoken);
+                        navigate("/");
+                        props.showAlert("Signup Successfully","success")
+                      }
+                      else{
+                        props.showAlert("Already have account Please login!","success");
+                      }
+              }
+              googleSubmit();
+                // setgoogle();
+                
+              }}
+              onError={() => {
+                console.log('Login Failed');
+                props.showAlert("Invalid Credentials","danger");
+              }}
+            />
+          </GoogleOAuthProvider>
+    </div>
     </div>
   )
 }

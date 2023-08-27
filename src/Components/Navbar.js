@@ -23,8 +23,11 @@ function Navbar(props) {
     const response  = await axios.get('http://localhost:5000/api/pic/fetchImage',config)
     setpic(response.data);
     }
+    const func=()=>{
+      
+    }
   useEffect(() => {
-    getpic();
+    localStorage.getItem("token")?getpic():func();
   },[])
   return (
     <>
