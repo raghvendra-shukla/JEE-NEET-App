@@ -10,7 +10,7 @@ function JEE() {
   const [loading, setloading] = useState(false);
   const [search, setsearch] = useState("");
   const jeedata = async () => {
-    let url = `https://alert-top-coat-wasp.cyclic.app/api/jee`;
+    let url = `https://jee-neet-api.onrender.com/api/jee`;
     setloading(true);
     let data = await fetch(url);
     let parsedData = await data.json();

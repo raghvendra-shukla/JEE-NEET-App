@@ -9,7 +9,7 @@ function NEET() {
   const [search, setsearch] = useState("");
   const neetdata=async()=>{
     // https://alert-top-coat-wasp.cyclic.app/api/neet
-    let url=`https://alert-top-coat-wasp.cyclic.app/api/neet`;
+    let url=`https://jee-neet-api.onrender.com/api/neet`;
     setloading(true);
     let data=await fetch(url);
     let parsedData=await data.json();
