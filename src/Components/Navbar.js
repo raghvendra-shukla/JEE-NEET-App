@@ -38,7 +38,7 @@ function Navbar(props) {
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <img
-                    className="h-11 w-20"
+                    className="h-11 w-20 rounded mx-3"
                     src="https://kashmirdotcom.in/wp-content/uploads/2022/07/How-to-Solve-Difficult-Problems-In-JEE-and-NEET2-1280x720-1.jpg"
                     alt="Your Company"
                   />
