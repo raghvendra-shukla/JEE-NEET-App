@@ -18,24 +18,24 @@ function Home() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src="https://www.examturf.com/eqtkhtabd/wp-content/uploads/2021/02/IIT-JEE.jpg" className="d-block w-100" style={{ height: "24rem" }} alt="..." />
+            <img src="https://scontent.fidr4-3.fna.fbcdn.net/v/t1.6435-9/36828569_1705741729475512_8935449309210476544_n.png?_nc_cat=105&ccb=1-7&_nc_sid=2a1932&_nc_ohc=5j_0TS1NuVcQ7kNvgHNZc_E&_nc_ht=scontent.fidr4-3.fna&_nc_gid=Arg_N9N1FvnNQiHyNnFF8gk&oh=00_AYD6LqIECQJ14B-SB6DkUVf5Y61q-h6MYjP8PGAJFOXaew&oe=6710D668" className="d-block w-100" style={{ height: "24rem" }} alt="..." />
             <div className="carousel-caption d-none d-md-block text-black">
-              <h5 className="h4 font-weight-bold">JEE Mains And Advanced</h5>
-              <p className="font-serif font-weight-bold">This app will help you get the best books for JEE Mains and Advanced preparation.</p>
+              <h5 className="h4 font-poppins font-weight-bold">JEE Mains And Advanced</h5>
+              <p className="font-poppins font-weight-bold">This app will help you get the best books for JEE Mains and Advanced preparation.</p>
             </div>
           </div>
           <div className="carousel-item">
-            <img src="https://images.squarespace-cdn.com/content/v1/5bac99efb2cf79a76d80781d/1566544519200-TERBJDS8FSFQGBGCC3B0/NEET.png" className="d-block w-100" style={{ height: "24rem" }} alt="..." />
-            <div className="carousel-caption d-none d-md-block text-black">
-              <h5 className="h4 font-weight-bold">NEET And Medical Entrance Exams</h5>
-              <p className="font-serif font-weight-bold">This app will help you get the best books for NEET and other medical entrance exams preparation.</p>
+            <img src="https://img.onmanorama.com/content/dam/mm/en/lifestyle/health/images/2020/12/1/medical-doctor-c.jpg" className="d-block w-100" style={{ height: "24rem" }} alt="..." />
+            <div className="carousel-caption d-none d-md-block text-white">
+              <h5 className="h4 font-poppins font-weight-bold">NEET And Medical Entrance Exams</h5>
+              <p className="font-poppins font-weight-bold">This app will help you get the best books for NEET and other medical entrance exams preparation.</p>
             </div>
           </div>
           <div className="carousel-item">
-            <img src="https://helios-i.mashable.com/imagery/articles/06qvPfjkNRMAmTvVoPDDflf/hero-image.fill.size_1248x702.v1661351758.jpg" className="d-block w-100" style={{ height: "24rem" }} alt="..." />
+            <img src="https://png.pngtree.com/thumb_back/fh260/background/20191106/pngtree-back-to-school-rectangular-blackboard-education-book-pen-holder-image_321417.jpg" className="d-block w-100" style={{ height: "24rem" }} alt="..." />
             <div className="carousel-caption d-none d-md-block text-black">
-              <h5 className="h4 font-weight-bold">Find The Books You Need</h5>
-              <p className="font-serif font-weight-bold">This app facilitates you in finding the books you need. If a book is not present in our app, you can send us feedback, and we will add it as soon as possible.</p>
+              <h5 className="h4 font-poppins font-weight-bold">Find The Books You Need</h5>
+              <p className="font-poppins font-weight-bold">This app facilitates you in finding the books you need. If a book is not present in our app, you can send us feedback, and we will add it as soon as possible.</p>
             </div>
           </div>
         </div>
